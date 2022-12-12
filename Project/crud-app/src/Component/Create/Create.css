@@ -1,0 +1,11 @@
+.create .form-label{
+    color: white;
+}
+
+.create .form-group{
+    text-align: left;
+}
+
+.create button{
+    width: 150px;
+}

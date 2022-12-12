@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import './App.css';
+import Header from './Component/Header/Header';
+import { serverUrl } from './config';
 
 function App() {
+  const [users, setUsers] = useState([])
+  useEffect(() => {
+    fetch(serverUrl+'/users',{
+      method : "GET"
+    })
+    .then(data => data.json())
+    .then(json => {
+        setUsers(json.users)
+    })
+  }, [setUsers])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App bg-dark">
+      <Header/>
+      <div id="users">
+        <Outlet context={[users, setUsers]}/>
+      </div>
     </div>
   );
 }

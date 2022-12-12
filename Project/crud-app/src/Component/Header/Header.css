@@ -1,0 +1,12 @@
+header .navbar-brand img{
+    width: 50px;
+}
+
+header .navbar-nav a{
+    color: white;
+    text-decoration: none;
+}
+
+header .navbar-nav a:hover{
+    color: rgb(175, 175, 195);
+}
