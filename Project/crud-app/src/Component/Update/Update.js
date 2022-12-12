@@ -6,39 +6,56 @@ import moment from 'moment'
 import PopUp from './PopUp/PopUp';
 import './Update.css'
 
+// Name:Asif Mahmud
+// ID: c0837117
+
 const Update = () => {
+    //getting the variable for stored user list from outlet context
     const [users, setUsers] = useOutletContext();
 
+    // deleting data from the database using DELETE method
     const handleDelete = (id) => {
         fetch(serverUrl+"/users/"+id,{
             method : "DELETE"
         })
         .then(data => data.json())
         .then(res => {
+            // changing the UI based on user list
             setUsers(users.filter(product => product._id !== id))
             alert(res.message)
         })
     }
 
+    // variable for showing the pop up modal
     const [show, setShow] = useState(false);
+    // variable for populating the pop up form on the modal
     const [selectedUser, setSelectedUser] = useState({})
+    // method for closing the modal
     const handleClose = () => setShow(false);
+    //method for showing the modal
     const handleShow = (id) => {
+        //getting the user for populating the form with user data
         const user = users.filter(item => item._id === id)
+        //changing state with selected user data
         setSelectedUser(user[0])
+        //showing the modal
         setShow(true)
     }
 
+    //method for updating user with new data
     const updateUser = (newUser, id) =>{
-        console.log(newUser)
+        //variable for new user list
         const newUsers = users.map(user => {
+            // checking which user is being updated and setting the updated info
             if(user._id === id){
               return {...user, ...newUser}
             }
+            // if it's not the selected user, returning the user
             return user
         })
-        console.log(newUsers)
+        //changing the state with updated user info
         setUsers(newUsers)
+        //closing the modal
         handleClose()
     }
 

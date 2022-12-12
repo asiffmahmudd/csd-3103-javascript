@@ -5,9 +5,15 @@ import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
 import './Users.css'
 import { useOutletContext } from 'react-router-dom';
 
+// Name:Asif Mahmud
+// ID: c0837117
+
 const Users = () => {
+    // getting the user list form outlet context
     const [users] = useOutletContext();
+    //setting row data for AGGrid Library
     const [rowData, setRowData] = useState(users); 
+    //setting the headers
     const [columnDefs] = useState([
         {field: 'firstName', filter: true},
         {field: 'lastName', filter: true},

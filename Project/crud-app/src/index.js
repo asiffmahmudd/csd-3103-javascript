@@ -12,12 +12,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Users from './Component/Users/Users';
 import Create from './Component/Create/Create';
 import Update from './Component/Update/Update';
+import Home from './Component/Home/Home';
 
+
+// Name: Asif Mahmud
+// ID: c0837117
+
+//creating rounting for the app
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App/>,
     children: [
+      {
+        path: "/",
+        element: <Home/>,
+      },
       {
         path: "users",
         element: <Users/>,

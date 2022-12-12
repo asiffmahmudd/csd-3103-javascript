@@ -98,7 +98,7 @@ app.put('/users/:id', (req,res) => {
       else {
         if(data.modifiedCount > 0){ // if the user was updated sending success response
             res.send({
-                message: "User was deleted successfully!",
+                message: "User was updated successfully!",
                 modifiedCount: data.modifiedCount
             });
         }

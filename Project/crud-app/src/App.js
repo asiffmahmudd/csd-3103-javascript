@@ -4,8 +4,13 @@ import './App.css';
 import Header from './Component/Header/Header';
 import { serverUrl } from './config';
 
+// Name:Asif Mahmud
+// ID: c0837117
+
 function App() {
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([]) //variable for storing user list data
+
+  //using useeffect hook to fetch data from the database
   useEffect(() => {
     fetch(serverUrl+'/users',{
       method : "GET"
@@ -14,13 +19,14 @@ function App() {
     .then(json => {
         setUsers(json.users)
     })
-  }, [setUsers])
+  }, [setUsers]) // this dependency determines changes in UI
 
   return (
     <div className="App bg-dark">
       <Header/>
       <div id="users">
-        <Outlet context={[users, setUsers]}/>
+        {/* body of the web app */}
+        <Outlet context={[users, setUsers]}/> 
       </div>
     </div>
   );

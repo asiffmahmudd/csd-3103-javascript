@@ -4,9 +4,15 @@ import Form from 'react-bootstrap/Form'
 import { useForm } from "react-hook-form";
 import { serverUrl } from '../../config';
 
+// Name:Asif Mahmud
+// ID: c0837117
+
 const UserForm = ({user, addUser, updateUser}) => {
+    // using react form hook for handling form data
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    // handling submit
     const onSubmit = (data) =>{
+        // checking if it's for update or creating user. if there's a selected/valid user it's for update, otherwise create
         if(!user){
             handleCreate(data)
         }
@@ -15,6 +21,7 @@ const UserForm = ({user, addUser, updateUser}) => {
         }
     }
 
+    // calling the post API for creating a user
     const handleCreate = (data) =>{
         fetch(serverUrl+"/users",{
             method : "POST",
@@ -23,13 +30,17 @@ const UserForm = ({user, addUser, updateUser}) => {
         })
         .then(data => data.json())
         .then(res => {
+            //resetting the form
             reset()
+            // method for adding the user and change the UI and state
             addUser(data)
+            // alert for the user
             alert(res.message)
         })
     }
 
     const handleUpdate = (data) =>{
+        // calling the api for updating user with the selected id
         fetch(serverUrl+"/users/"+user._id,{
             method : "PUT",
             headers: { 'Content-Type': 'application/json' },
@@ -38,9 +49,11 @@ const UserForm = ({user, addUser, updateUser}) => {
         .then(data => data.json())
         .then(res => {
             if(res.modifiedCount > 0){
+                //resetting the form
                 reset()
                 updateUser(data, user._id)
             }
+            //message for the user
             alert(res.message)
         })
     }
